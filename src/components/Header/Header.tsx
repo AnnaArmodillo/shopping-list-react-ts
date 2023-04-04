@@ -2,9 +2,9 @@ import { NewItemForm } from 'components/NewItemForm/NewItemForm';
 
 export const Header = () => {
   return (
-    <div>
-      <h1>HEADER</h1>
+    <>
+      <h4>Запланировать новую покупку</h4>
       <NewItemForm />
-    </div>
+    </>
   );
 };

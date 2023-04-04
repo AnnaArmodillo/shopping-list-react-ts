@@ -11,7 +11,7 @@ const itemsSlice = createSlice({
       reducer(state, action: PayloadAction<Item>) {
         state.push(action.payload);
       },
-      prepare(title: string, cost: number) {
+      prepare(title: string, cost: string) {
         return {
           payload: {
             id: crypto.randomUUID(),

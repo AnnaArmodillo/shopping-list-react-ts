@@ -7,7 +7,10 @@ interface InitialReduxState {
 
 export const getInitState = (): InitialReduxState => {
   const dataFromLS = localStorage.getItem(REDUX_SHOPPING_LIST_LS_KEY);
-  return dataFromLS ? JSON.parse(dataFromLS) : [];
+  if (dataFromLS) {
+    return JSON.parse(dataFromLS);
+  }
+  return { items: [] };
 };
 
 export const initState = getInitState();

@@ -61,5 +61,7 @@ module.exports = {
       },
     ],
     'react/react-in-jsx-scope': 0,
+    'no-console': 0,
+    '@typescript-eslint/no-non-null-assertion': 0,
   },
 };

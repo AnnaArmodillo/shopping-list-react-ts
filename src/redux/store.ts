@@ -4,10 +4,10 @@ import { itemsReducer } from './slices/itemsSlice';
 import { REDUX_SHOPPING_LIST_LS_KEY } from './constants';
 
 export const store = configureStore({
+  preloadedState: getInitState(),
   reducer: {
     items: itemsReducer,
   },
-  preloadedState: getInitState(),
 });
 
 store.subscribe(() => {
