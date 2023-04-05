@@ -1,0 +1,23 @@
+.list {
+    list-style-type: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    overflow-y:scroll;
+    max-height: 50vh;
+    padding: 8px;
+    margin: 4px;
+}
+
+.list::-webkit-scrollbar {
+    width: 12px;
+    background-color: rgb(14 3 24);
+}
+
+.list::-webkit-scrollbar-thumb {
+    background-color: rgb(59 58 58);
+}
+
+.list::-webkit-scrollbar-corner {
+    background-color: rgb(14 3 24);
+}
