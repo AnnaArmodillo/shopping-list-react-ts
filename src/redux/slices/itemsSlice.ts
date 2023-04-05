@@ -17,14 +17,18 @@ const itemsSlice = createSlice({
             id: crypto.randomUUID(),
             title,
             cost,
-            status: 'active',
+            active: true,
           },
         };
       },
     },
+    changeItemStatus(state, action) {
+      const currentItem = state.find((item) => item.id === action.payload);
+      currentItem!.active = !currentItem!.active;
+    },
   },
 });
 
-export const { addNewItem } = itemsSlice.actions;
+export const { addNewItem, changeItemStatus } = itemsSlice.actions;
 export const itemsReducer = itemsSlice.reducer;
 export const getItemsSelector = (state: RootState) => state.items;

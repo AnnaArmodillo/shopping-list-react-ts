@@ -1,13 +1,15 @@
 import { Item } from 'models/itemTypes';
 import { FC, useCallback, useState } from 'react';
-import { ACTIVE, BOUGHT, DELETED } from 'redux/constants';
 import classNames from 'classnames';
 import { Modal } from 'components/Modal/Modal';
+import { useDispatch } from 'react-redux';
+import { changeItemStatus } from 'redux/slices/itemsSlice';
 import styles from './item.module.scss';
 
-export const ListItem: FC<Item> = ({ id, status, title, cost }) => {
-  console.log(id, status, title, cost);
+export const ListItem: FC<Item> = ({ id, active, title, cost }) => {
+  console.log(id, active, title, cost);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const dispatch = useDispatch();
   function openModalHandler() {
     setIsModalOpen(true);
   }
@@ -15,21 +17,20 @@ export const ListItem: FC<Item> = ({ id, status, title, cost }) => {
     setIsModalOpen(false);
   }, [setIsModalOpen]);
   function changeStatusHandler() {
-    console.log('change status');
+    dispatch(changeItemStatus(id));
   }
   function deleteHandler() {
-    console.log('delete', id);
     closeModalHandler();
   }
   return (
-    <div className={styles.item}>
+    <div className={classNames(styles.item, !active ? styles.itemDone : '')}>
       <div className={styles.infoWrapper}>
         <div
           // onInput={getNewTitleHandler}
           // onMouseDown={buttonSaveShowHandler}
           // suppressContentEditableWarning
           // contentEditable
-          className={status === BOUGHT ? styles.itemInfoDone : ''}
+          className={!active ? styles.itemInfoDone : ''}
         >
           {title}
         </div>
@@ -37,7 +38,7 @@ export const ListItem: FC<Item> = ({ id, status, title, cost }) => {
           // onMouseDown={buttonSaveShowHandler}
           // suppressContentEditableWarning
           // contentEditable
-          className={status === BOUGHT ? styles.itemInfoDone : ''}
+          className={!active ? styles.itemInfoDone : ''}
         >
           {cost} руб.
         </div>
@@ -50,12 +51,12 @@ export const ListItem: FC<Item> = ({ id, status, title, cost }) => {
           type="button"
           className={classNames(
             styles.button,
-            { [styles.buttonMarkAsBought]: status === ACTIVE },
-            { [styles.buttonMarkAsActive]: status === BOUGHT },
+            { [styles.buttonMarkAsBought]: active },
+            { [styles.buttonMarkAsActive]: !active },
           )}
           onClick={changeStatusHandler}
         >
-          {status === DELETED ? 'Вернуть' : 'Пометить как купленное'}
+          {active ? 'Пометить как купленное' : 'Вернуть'}
         </button>
         {/* <button
           className={isSaveHidden ? styles.buttonHidden : styles.button}
