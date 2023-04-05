@@ -3,7 +3,7 @@ import { FC, useCallback, useState } from 'react';
 import classNames from 'classnames';
 import { Modal } from 'components/Modal/Modal';
 import { useDispatch } from 'react-redux';
-import { changeItemStatus } from 'redux/slices/itemsSlice';
+import { changeItemStatus, deleteItem } from 'redux/slices/itemsSlice';
 import styles from './item.module.scss';
 
 export const ListItem: FC<Item> = ({ id, active, title, cost }) => {
@@ -20,6 +20,7 @@ export const ListItem: FC<Item> = ({ id, active, title, cost }) => {
     dispatch(changeItemStatus(id));
   }
   function deleteHandler() {
+    dispatch(deleteItem(id));
     closeModalHandler();
   }
   return (

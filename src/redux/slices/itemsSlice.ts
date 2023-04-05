@@ -26,9 +26,12 @@ const itemsSlice = createSlice({
       const currentItem = state.find((item) => item.id === action.payload);
       currentItem!.active = !currentItem!.active;
     },
+    deleteItem(state, action) {
+      return state.filter((item) => item.id !== action.payload);
+    },
   },
 });
 
-export const { addNewItem, changeItemStatus } = itemsSlice.actions;
+export const { addNewItem, changeItemStatus, deleteItem } = itemsSlice.actions;
 export const itemsReducer = itemsSlice.reducer;
 export const getItemsSelector = (state: RootState) => state.items;
