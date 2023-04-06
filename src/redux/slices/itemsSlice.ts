@@ -34,9 +34,13 @@ const itemsSlice = createSlice({
       currentItem!.cost = action.payload.cost;
       currentItem!.title = action.payload.title;
     },
+    clearAllItems() {
+      return [];
+    },
   },
 });
 
-export const { addNewItem, changeItemStatus, deleteItem, editItem } = itemsSlice.actions;
+export const { addNewItem, changeItemStatus, deleteItem, editItem, clearAllItems } =
+  itemsSlice.actions;
 export const itemsReducer = itemsSlice.reducer;
 export const getItemsSelector = (state: RootState) => state.items;

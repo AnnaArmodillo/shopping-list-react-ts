@@ -7,7 +7,6 @@ import { changeItemStatus, deleteItem, editItem } from 'redux/slices/itemsSlice'
 import styles from './item.module.scss';
 
 export const ListItem: FC<Item> = ({ id, active, title, cost }) => {
-  console.log(id, active, title, cost);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalErrorOpen, setIsModalErrorOpen] = useState(false);
   const [isContentEditable, setIsContentEditable] = useState(false);

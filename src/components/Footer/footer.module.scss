@@ -1,0 +1,54 @@
+%button {
+    background-color: rgb(199 84 84);
+    font-size: 1.5rem;
+    border-radius: 16px;
+    padding: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    color: rgb(247 232 250);
+
+    &:hover {
+        box-shadow: 4px 8px 12px 0 rgb(245 221 221 / 24%);
+    }
+}
+
+.buttonClear {
+    @extend %button;
+
+    border-color: rgb(199 84 84);
+    margin-top: 40px;
+}
+
+.buttonCancel {
+    @extend %button;
+
+    background-color: rgb(29 26 26);
+    font-size: 1.5rem;
+
+    &:hover {
+        box-shadow: 4px 8px 20px 0 rgb(2 2 2 / 28.8%);
+    }
+}
+
+.buttonSubmit {
+    @extend %button;
+
+    background-color: rgb(70 7 7);
+    font-size: 1.5rem;
+
+    &:hover {
+        box-shadow: 4px 8px 20px 0 rgb(2 2 2 / 28.8%);
+    }
+}
+
+.modalQuestion {
+    margin-top: 40px;
+}
+
+.buttonsModalWrapper {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 20px;
+}
+
