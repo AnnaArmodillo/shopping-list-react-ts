@@ -1,7 +1,8 @@
 .wrapper {
+    width: 90%;
     display: flex;
-    justify-content: space-evenly;
-    margin: 24px 0;
+    justify-content: space-between;
+    margin: 24px auto;
     gap: 12px;
 }
 
