@@ -12,13 +12,13 @@
 
 .list::-webkit-scrollbar {
     width: 12px;
-    background-color: rgb(14 3 24);
+    background-color: var(--color-scrollbar-background);
 }
 
 .list::-webkit-scrollbar-thumb {
-    background-color: rgb(59 58 58);
+    background-color: var(--color-scrollbar-thumb);
 }
 
 .list::-webkit-scrollbar-corner {
-    background-color: rgb(14 3 24);
+    background-color: var(--color-scrollbar-background);
 }

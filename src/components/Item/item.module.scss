@@ -2,13 +2,13 @@
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    background-color: rgb(45 39 92);
+    background-color: var(--color-item-active-background);
     border-radius: 16px;
     padding: 8px;
 }
 
 .itemDone {
-    background-color: rgb(33 61 33);
+    background-color: var(--color-item-bought-background);
 }
 
 .infoWrapper {
@@ -27,53 +27,65 @@
 }
 
 .buttonsWrapper {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     justify-content: space-between;
     margin-bottom: 12px;
 }
 
+.buttonsEditWrapper {
+    display: flex;
+    gap: 20px;
+    justify-content: flex-end;
+}
+
 %button {
-    color: rgb(247 232 250);
+    color: var(--color-text);
     padding: 8px;
     border-radius: 8px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: 500;
     border: none;
     cursor: pointer;
+    width: fit-content;
+    height: fit-content;
 }
 
 .buttonDelete {
     @extend %button;
 
-    background-color: rgb(163 77 77);
+    background-color: var(--color-item-delete-background);
 }
 
 .buttonMarkAsActive {
     @extend %button;
 
-    background-color: rgb(45 39 92);
+    background-color: var(--color-item-active-background);
 }
 
 .buttonMarkAsBought {
     @extend %button;
 
-    background-color: rgb(33 61 33);
+    background-color: var(--color-item-bought-background);
 }
 
 .buttonEdit, .buttonSave, .buttonRestore {
     font-size: 12px;
-    color: rgb(247 232 250);
+    color: var(--color-text);
+    padding: 8px;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(29 26 26);
+    background-color: var(--color-background);
     border-radius: 4px;
     cursor: pointer;
     border: none;
+    width: fit-content;
+    height: fit-content;
 }
 
 %button:hover, .buttonEdit:hover, .buttonSave:hover, .buttonRestore:hover {
-    box-shadow: 4px 8px 10px 0 rgb(245 221 221 / 24%);
+    box-shadow: 4px 8px 10px 0 var(--color-button-box-shadow);
 }
 
 .modalQuestion {
@@ -89,22 +101,24 @@
 .buttonCancel {
     @extend %button;
 
-    background-color: rgb(29 26 26);
+    background-color: var(--color-button-cancel-background);
+    color: var(--color-modal-button-text);
     font-size: 1.5rem;
 
     &:hover {
-        box-shadow: 4px 8px 20px 0 rgb(2 2 2 / 28.8%);
+        box-shadow: 4px 8px 20px 0 var(--color-modal-button-shadow);
     }
 }
 
 .buttonSubmit {
     @extend %button;
 
-    background-color: rgb(70 7 7);
-    font-size: 1.5rem;
+    background-color: var(--color-button-delete-background);
+    color: var(--color-modal-button-text);
+     font-size: 1.5rem;
 
     &:hover {
-        box-shadow: 4px 8px 20px 0 rgb(2 2 2 / 28.8%);
+        box-shadow: 4px 8px 20px 0 var(--color-modal-button-shadow);
     }
 }
 
@@ -113,5 +127,5 @@ div[contentEditable="true"] {
     font-style: italic;
     cursor: pointer;
     min-width: 20px;
-    border-bottom: 1px solid rgb(247 232 250);
+    border-bottom: 1px solid var(--color-text);
 }

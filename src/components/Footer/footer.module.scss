@@ -1,44 +1,45 @@
 %button {
     font-size: 1.5rem;
     border-radius: 16px;
-    padding: 8px;
-    border: none;
+    padding: 12px;
     cursor: pointer;
     font-weight: 600;
-    color: rgb(247 232 250);
-
-    &:hover {
-        box-shadow: 4px 8px 12px 0 rgb(245 221 221 / 24%);
-    }
 }
 
 .buttonClear {
     @extend %button;
 
-    background-color: rgb(199 84 84);
-    border-color: rgb(199 84 84);
+    background-color: var(--color-button-delete-background);
+    border-color: var(--color-button-delete-border);
     margin-top: 20px;
+    color: var(--color-text);
+
+    &:hover {
+        box-shadow: 4px 8px 12px 0 var(--color-button-box-shadow);
+    }
 }
 
 .buttonCancel {
     @extend %button;
 
-    background-color: rgb(29 26 26);
-    font-size: 1.5rem;
+    background-color: var(--color-button-cancel-background);
+    border: none;
+    color: var(--color-modal-button-text);
 
     &:hover {
-        box-shadow: 4px 8px 20px 0 rgb(2 2 2 / 28.8%);
+        box-shadow: 4px 8px 20px 0 var(--color-modal-button-shadow);
     }
 }
 
 .buttonSubmit {
     @extend %button;
 
-    background-color: rgb(70 7 7);
-    font-size: 1.5rem;
+    background-color: var(--color-button-delete-background);
+    border: none;
+    color: var(--color-modal-button-text);
 
     &:hover {
-        box-shadow: 4px 8px 20px 0 rgb(2 2 2 / 28.8%);
+        box-shadow: 4px 8px 20px 0 var(--color-modal-button-shadow);
     }
 }
 

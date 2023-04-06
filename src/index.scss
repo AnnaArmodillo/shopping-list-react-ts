@@ -5,12 +5,55 @@
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --color-text: rgb(14 3 24);
+  --color-background:  rgb(247 232 250);
+  --color-button-background: rgb(245 221 221);
+  --color-button-box-shadow: rgb(59 58 58 / 24%);
+  --color-button-border: rgb(218 205 205);
+  --color-field-background: rgb(245 221 221);
+  --color-button-delete-background: rgb(184 38 38);
+  --color-button-delete-border: rgb(204 61 61);
+  --color-button-cancel-background: rgb(29 26 26);
+  --color-modal-button-shadow: rgb(2 2 2 / 28.8%);
+  --color-modal-text: rgb(14 3 24);
+  --color-modal-background: rgb(26 24 24 / 32.9%);
+  --color-modal-inner-background: rgb(247 232 250);
+  --color-modal-button-text: rgb(247 232 250);
+  --color-item-active-background: rgb(164 189 255);
+  --color-item-bought-background: rgb(189 250 203);
+  --color-item-delete-background: rgb(214 117 117);
+  --color-scrollbar-background: rgb(247 232 250);
+  --color-scrollbar-thumb: rgb(247 205 205);
+}
+
+:root[data-color-scheme="dark"] {
+  --color-text: rgb(247 232 250);
+  --color-background: rgb(14 3 24);
+  --color-button-background: rgb(59 58 58);
+  --color-button-box-shadow: rgb(245 221 221 / 24%);
+  --color-button-border: rgb(102 98 98);
+  --color-field-background: rgb(59 58 58);
+  --color-button-delete-background: rgb(163 77 77);
+  --color-button-delete-border: rgb(199 84 84);
+  --color-button-cancel-background: rgb(29 26 26);
+  --color-modal-button-shadow: rgb(2 2 2 / 28.8%);
+  --color-modal-text: rgb(14 3 24);
+  --color-modal-background: rgb(26 24 24 / 32.9%);
+  --color-modal-inner-background: rgb(247 232 250);
+  --color-modal-button-text: rgb(247 232 250);
+  --color-item-active-background: rgb(45 39 92);
+  --color-item-bought-background: rgb(33 61 33);
+  --color-item-delete-background: rgb(199 84 84);
+  --color-scrollbar-background: rgb(14 3 24);
+  --color-scrollbar-thumb: rgb(59 58 58);
 }
 
 body {
   margin: 0;
   display: flex;
   place-items: center;
-  min-width: 320px;
   min-height: 100vh;
+  color: var(--color-text);
+  background-color: var(--color-background);
 }

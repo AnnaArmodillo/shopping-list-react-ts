@@ -3,6 +3,7 @@ import { REDUX_SHOPPING_LIST_LS_KEY } from './constants';
 
 interface InitialReduxState {
   items: Item[];
+  lightColorScheme: boolean;
 }
 
 export const getInitState = (): InitialReduxState => {
@@ -10,7 +11,8 @@ export const getInitState = (): InitialReduxState => {
   if (dataFromLS) {
     return JSON.parse(dataFromLS);
   }
-  return { items: [] };
+  return { items: [], lightColorScheme: true };
 };
 
 export const initState = getInitState();
+console.log(initState);

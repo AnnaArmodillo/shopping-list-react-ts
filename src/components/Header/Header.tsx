@@ -1,11 +1,13 @@
 import { NewItemForm } from 'components/NewItemForm/NewItemForm';
 import { FC, useState } from 'react';
+import { ToggleColorScheme } from 'components/ToggleColorScheme/ToggleColorScheme';
 import styles from './header.module.scss';
 
 export const Header: FC = () => {
   const [isActive, setIsActive] = useState(false);
   return (
-    <>
+    <div className={styles.header}>
+      <ToggleColorScheme />
       <div
         className={styles.formToggle}
         role="button"
@@ -28,6 +30,6 @@ export const Header: FC = () => {
       <div className={isActive ? '' : styles.hidden}>
         <NewItemForm />
       </div>
-    </>
+    </div>
   );
 };

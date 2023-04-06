@@ -10,8 +10,8 @@
     border-radius: 8px;
     padding: 4px;
     text-align: center;
-    color: rgb(247 232 250);
-    background-color: rgb(59 58 58);
+    color: var(--color-text);
+    background-color: var(--color-field-background);
     border: none;
     outline: none;
     height: 40px;
@@ -23,19 +23,19 @@
     border-radius: 8px;
     padding: 12px;
     text-align: center;
-    color: rgb(247 232 250);
-    background-color: rgb(59 58 58);
-    border-color: rgb(102 98 98);
+    color: var(--color-text);
+    background-color: var(--color-button-background);
+    border-color: var(--color-button-border);
     cursor: pointer;
     height: 40px;
 }
 
 .button:hover:not([disabled]) {
-    box-shadow: 4px 8px 12px 0 rgb(245 221 221 / 24%);
+    box-shadow: 4px 8px 12px 0 var(--color-button-box-shadow);
 }
 
 .error {
-    color: rgb(247 232 250);
+    color: var(--color-text);
     font-size: 1rem;
 }
 

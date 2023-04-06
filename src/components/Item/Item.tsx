@@ -121,35 +121,37 @@ const ListItem: FC<Item> = ({ id, active, title, cost }) => {
           >
             {active ? 'Пометить как купленное' : 'Вернуть'}
           </button>
-          {isContentEditable ? (
-            <>
+          <div className={styles.buttonsEditWrapper}>
+            {isContentEditable ? (
+              <>
+                <button
+                  type="button"
+                  className={styles.buttonSave}
+                  title="сохранить изменения"
+                  onClick={saveHandler}
+                >
+                  <i className="fa-solid fa-floppy-disk" />
+                </button>
+                <button
+                  type="button"
+                  className={styles.buttonRestore}
+                  title="отменить изменения"
+                  onClick={cancelChangeHandler}
+                >
+                  <i className="fa-solid fa-arrow-rotate-left" />
+                </button>
+              </>
+            ) : (
               <button
                 type="button"
-                className={styles.buttonSave}
-                title="сохранить изменения"
-                onClick={saveHandler}
+                className={styles.buttonEdit}
+                title="редактировать"
+                onClick={() => setIsContentEditable(true)}
               >
-                <i className="fa-solid fa-floppy-disk" />
+                <i className="fa-solid fa-pen" />
               </button>
-              <button
-                type="button"
-                className={styles.buttonRestore}
-                title="отменить изменения"
-                onClick={cancelChangeHandler}
-              >
-                <i className="fa-solid fa-arrow-rotate-left" />
-              </button>
-            </>
-          ) : (
-            <button
-              type="button"
-              className={styles.buttonEdit}
-              title="редактировать"
-              onClick={() => setIsContentEditable(true)}
-            >
-              <i className="fa-solid fa-pen" />
-            </button>
-          )}
+            )}
+          </div>
         </div>
       </div>
       <Modal isModalOpen={isModalOpen} closeModalHandler={closeModalHandler}>

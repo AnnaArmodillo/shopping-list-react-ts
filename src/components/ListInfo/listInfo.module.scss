@@ -7,14 +7,14 @@
 }
 
 .planned {
-    background-color: rgb(45 39 92);
+    background-color: var(--color-item-active-background);
     border: none;
     border-radius: 8px;
     padding: 8px;
 }
 
 .fact {
-    background-color: rgb(33 61 33);
+    background-color: var(--color-item-bought-background);
     border: none;
     border-radius: 8px;
     padding: 8px;

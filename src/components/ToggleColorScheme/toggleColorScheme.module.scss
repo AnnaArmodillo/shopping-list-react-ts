@@ -1,24 +1,15 @@
-.header {
-    position: relative;
-}
-
-.hidden {
-    display: none;
-}
-
-.formToggle {
-    cursor: pointer;
-}
-
-.button {
-    background-color: var(--color-button-background);
-    font-size: 1rem;
+.buttonToggleColor {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 1.5rem;
     border-radius: 8px;
     padding: 8px;
     border: none;
     cursor: pointer;
     font-weight: 600;
     color: var(--color-text);
+    background-color: var(--color-button-background);
 
     &:hover {
         box-shadow: 4px 8px 12px 0 var(--color-button-box-shadow);
