@@ -1,10 +1,11 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useDispatch } from 'react-redux';
 import { addNewItem } from 'redux/slices/itemsSlice';
+import { FC } from 'react';
 import styles from './newItemForm.module.scss';
 import { newItemValidationScheme } from './validator';
 
-export const NewItemForm = () => {
+export const NewItemForm: FC = () => {
   const dispatch = useDispatch();
   return (
     <Formik

@@ -1,6 +1,7 @@
 import { List } from 'components/List/List';
+import { FC } from 'react';
 
-export const Main = () => {
+export const Main: FC = () => {
   return (
     <div>
       <h3>Список покупок</h3>
