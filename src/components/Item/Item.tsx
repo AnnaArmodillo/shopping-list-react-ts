@@ -3,12 +3,16 @@ import { FC, useCallback, useState } from 'react';
 import classNames from 'classnames';
 import { Modal } from 'components/Modal/Modal';
 import { useDispatch } from 'react-redux';
-import { changeItemStatus, deleteItem } from 'redux/slices/itemsSlice';
+import { changeItemStatus, deleteItem, editItem } from 'redux/slices/itemsSlice';
 import styles from './item.module.scss';
 
 export const ListItem: FC<Item> = ({ id, active, title, cost }) => {
   console.log(id, active, title, cost);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalErrorOpen, setIsModalErrorOpen] = useState(false);
+  const [isContentEditable, setIsContentEditable] = useState(false);
+  const [newTitle, setNewTitle] = useState(title);
+  const [newCost, setNewCost] = useState(cost);
   const dispatch = useDispatch();
   function openModalHandler() {
     setIsModalOpen(true);
@@ -16,6 +20,9 @@ export const ListItem: FC<Item> = ({ id, active, title, cost }) => {
   const closeModalHandler = useCallback(() => {
     setIsModalOpen(false);
   }, [setIsModalOpen]);
+  const closeModalErrorHandler = useCallback(() => {
+    setIsModalErrorOpen(false);
+  }, [setIsModalErrorOpen]);
   function changeStatusHandler() {
     dispatch(changeItemStatus(id));
   }
@@ -23,25 +30,42 @@ export const ListItem: FC<Item> = ({ id, active, title, cost }) => {
     dispatch(deleteItem(id));
     closeModalHandler();
   }
+  function saveHandler() {
+    if (newTitle.length >= 2 && newTitle.length <= 20 && +newCost > 0) {
+      dispatch(editItem({ id, title: newTitle, cost: newCost }));
+      setIsContentEditable(false);
+    } else {
+      setIsModalErrorOpen(true);
+    }
+  }
+  function getNewTitleHandler(event: React.ChangeEvent<HTMLInputElement>) {
+    setNewTitle(event.target.innerText);
+  }
+
+  function getNewCostHandler(event: React.ChangeEvent<HTMLInputElement>) {
+    setNewCost(event.target.innerText);
+  }
   return (
     <div className={classNames(styles.item, !active ? styles.itemDone : '')}>
       <div className={styles.infoWrapper}>
         <div
-          // onInput={getNewTitleHandler}
-          // onMouseDown={buttonSaveShowHandler}
-          // suppressContentEditableWarning
-          // contentEditable
+          onInput={getNewTitleHandler}
+          suppressContentEditableWarning
+          contentEditable={isContentEditable}
           className={!active ? styles.itemInfoDone : ''}
         >
           {title}
         </div>
-        <div // onInput={getNewCostHandler}
-          // onMouseDown={buttonSaveShowHandler}
-          // suppressContentEditableWarning
-          // contentEditable
-          className={!active ? styles.itemInfoDone : ''}
-        >
-          {cost} руб.
+        <div className={styles.costWrapper}>
+          <div
+            onInput={getNewCostHandler}
+            suppressContentEditableWarning
+            contentEditable={isContentEditable}
+            className={!active ? styles.itemInfoDone : ''}
+          >
+            {cost}
+          </div>
+          <div>руб.</div>
         </div>
       </div>
       <div className={styles.buttonsWrapper}>
@@ -51,7 +75,6 @@ export const ListItem: FC<Item> = ({ id, active, title, cost }) => {
         <button
           type="button"
           className={classNames(
-            styles.button,
             { [styles.buttonMarkAsBought]: active },
             { [styles.buttonMarkAsActive]: !active },
           )}
@@ -59,12 +82,25 @@ export const ListItem: FC<Item> = ({ id, active, title, cost }) => {
         >
           {active ? 'Пометить как купленное' : 'Вернуть'}
         </button>
-        {/* <button
-          className={isSaveHidden ? styles.buttonHidden : styles.button}
-          onClick={handleSave}
-        >
-          Сохранить
-        </button> */}
+        {isContentEditable ? (
+          <button
+            type="button"
+            className={styles.buttonSave}
+            title="сохранить изменения"
+            onClick={saveHandler}
+          >
+            <i className="fa-solid fa-floppy-disk" />
+          </button>
+        ) : (
+          <button
+            type="button"
+            className={styles.buttonEdit}
+            title="редактировать"
+            onClick={() => setIsContentEditable(true)}
+          >
+            <i className="fa-solid fa-pen" />
+          </button>
+        )}
       </div>
       <Modal isModalOpen={isModalOpen} closeModalHandler={closeModalHandler}>
         <div className={styles.modalQuestion}>Точно удалить &quot;{title}&quot; из списка?</div>
@@ -74,6 +110,16 @@ export const ListItem: FC<Item> = ({ id, active, title, cost }) => {
           </button>
           <button onClick={deleteHandler} className={styles.buttonSubmit} type="button">
             Удалить
+          </button>
+        </div>
+      </Modal>
+      <Modal isModalOpen={isModalErrorOpen} closeModalHandler={closeModalErrorHandler}>
+        <div className={styles.modalQuestion}>
+          Наименование должно содержать от 2 до 20 символов, и цена должна быть положительным числом
+        </div>
+        <div className={styles.buttonsModalWrapper}>
+          <button onClick={closeModalErrorHandler} className={styles.buttonCancel} type="button">
+            Понятно
           </button>
         </div>
       </Modal>

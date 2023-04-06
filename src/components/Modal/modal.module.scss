@@ -39,8 +39,8 @@
     background-color: rgb(29 26 26);
     border-radius: 4px;
     cursor: pointer;
-  }
 
-  .buttonClose:hover {
-    box-shadow: 4px 8px 20px 0 rgb(15 14 14 / 24%);
+    &:hover {
+      box-shadow: 4px 8px 20px 0 rgb(2 2 2 / 28.8%);
+    }
   }

@@ -4,6 +4,7 @@
     justify-content: space-evenly;
     background-color: rgb(45 39 92);
     border-radius: 16px;
+    padding: 8px;
 }
 
 .itemDone {
@@ -16,6 +17,11 @@
     margin-bottom: 12px;
 }
 
+.costWrapper {
+    display: flex;
+    gap: 8px;
+}
+
 .itemInfoDone {
     text-decoration: line-through;
 }
@@ -26,37 +32,47 @@
     margin-bottom: 12px;
 }
 
-.button {
-    color: inherit;
+%button {
+    color: rgb(247 232 250);
     padding: 8px;
     border-radius: 8px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: 500;
-    background-color: rgb(245 221 221 / 24%);
     border: none;
+    cursor: pointer;
 }
 
 .buttonDelete {
-    background-color: rgb(163 77 77);
-    color: inherit;
-    padding: 8px;
-    border-radius: 8px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-weight: 500;
-    border: none;
-}
+    @extend %button;
 
-.button:hover, .buttonDelete:hover {
-    cursor: pointer;
-    box-shadow: 4px 8px 20px 0 rgb(245 221 221 / 24%);
+    background-color: rgb(163 77 77);
 }
 
 .buttonMarkAsActive {
+    @extend %button;
+
     background-color: rgb(45 39 92);
 }
 
 .buttonMarkAsBought {
+    @extend %button;
+
     background-color: rgb(33 61 33);
+}
+
+.buttonEdit, .buttonSave {
+    font-size: 12px;
+    color: rgb(247 232 250);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(29 26 26);
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+%button:hover, .buttonEdit:hover, .buttonSave:hover {
+    box-shadow: 4px 8px 10px 0 rgb(245 221 221 / 24%);
 }
 
 .modalQuestion {
@@ -70,31 +86,31 @@
 }
 
 .buttonCancel {
+    @extend %button;
+
     background-color: rgb(29 26 26);
     font-size: 1.5rem;
-    border-radius: 16px;
-    padding: 8px;
-    cursor: pointer;
-    margin-bottom: 16px;
-    font-weight: 600;
-    color: lightgray;
-    font-family: inherit;
-    text-align: center;
+
+    &:hover {
+        box-shadow: 4px 8px 20px 0 rgb(2 2 2 / 28.8%);
+    }
 }
 
 .buttonSubmit {
+    @extend %button;
+
     background-color: rgb(70 7 7);
     font-size: 1.5rem;
-    border-radius: 16px;
-    padding: 8px;
-    cursor: pointer;
-    margin-bottom: 16px;
-    font-weight: 600;
-    color: lightgray;
-    font-family: inherit;
-    text-align: center;
+
+    &:hover {
+        box-shadow: 4px 8px 20px 0 rgb(2 2 2 / 28.8%);
+    }
 }
 
-.buttonCancel:hover, .buttonSubmit:hover {
-    box-shadow: 4px 8px 20px 0 rgb(15 14 14 / 24%);
+div[contentEditable="true"] {
+    outline: none;
+    font-style: italic;
+    cursor: pointer;
+    min-width: 20px;
+    border-bottom: 1px solid rgb(247 232 250);
 }

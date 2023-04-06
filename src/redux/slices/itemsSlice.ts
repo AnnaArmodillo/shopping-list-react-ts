@@ -22,16 +22,21 @@ const itemsSlice = createSlice({
         };
       },
     },
-    changeItemStatus(state, action) {
+    changeItemStatus(state, action: PayloadAction<Item['id']>) {
       const currentItem = state.find((item) => item.id === action.payload);
       currentItem!.active = !currentItem!.active;
     },
-    deleteItem(state, action) {
+    deleteItem(state, action: PayloadAction<Item['id']>) {
       return state.filter((item) => item.id !== action.payload);
+    },
+    editItem(state, action: PayloadAction<Pick<Item, 'id' | 'cost' | 'title'>>) {
+      const currentItem = state.find((item) => item.id === action.payload.id);
+      currentItem!.cost = action.payload.cost;
+      currentItem!.title = action.payload.title;
     },
   },
 });
 
-export const { addNewItem, changeItemStatus, deleteItem } = itemsSlice.actions;
+export const { addNewItem, changeItemStatus, deleteItem, editItem } = itemsSlice.actions;
 export const itemsReducer = itemsSlice.reducer;
 export const getItemsSelector = (state: RootState) => state.items;
