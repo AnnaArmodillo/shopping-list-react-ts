@@ -28,7 +28,7 @@ export const NewItemForm = () => {
                 type="text"
                 name="title"
                 placeholder="наименование"
-                autocomplete="off"
+                autoComplete="off"
               />
               <ErrorMessage className={styles.error} name="title" component="div" />
             </div>
@@ -38,7 +38,7 @@ export const NewItemForm = () => {
                 type="text"
                 name="cost"
                 placeholder="стоимость"
-                autocomplete="off"
+                autoComplete="off"
               />
               <ErrorMessage className={styles.error} name="cost" component="div" />
             </div>
