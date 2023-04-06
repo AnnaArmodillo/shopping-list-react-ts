@@ -23,11 +23,23 @@ export const NewItemForm = () => {
         return (
           <Form className={styles.form}>
             <div className={styles.fieldWrapper}>
-              <Field className={styles.field} type="text" name="title" placeholder="наименование" />
+              <Field
+                className={styles.field}
+                type="text"
+                name="title"
+                placeholder="наименование"
+                autocomplete="off"
+              />
               <ErrorMessage className={styles.error} name="title" component="div" />
             </div>
             <div className={styles.fieldWrapper}>
-              <Field className={styles.field} type="text" name="cost" placeholder="стоимость" />
+              <Field
+                className={styles.field}
+                type="text"
+                name="cost"
+                placeholder="стоимость"
+                autocomplete="off"
+              />
               <ErrorMessage className={styles.error} name="cost" component="div" />
             </div>
             <button className={styles.button} type="submit" disabled={!isValid || !dirty}>
