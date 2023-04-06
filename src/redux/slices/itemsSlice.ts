@@ -37,10 +37,19 @@ const itemsSlice = createSlice({
     clearAllItems() {
       return [];
     },
+    changeItemsOrder(state, action: PayloadAction<Array<Item>>) {
+      return action.payload;
+    },
   },
 });
 
-export const { addNewItem, changeItemStatus, deleteItem, editItem, clearAllItems } =
-  itemsSlice.actions;
+export const {
+  addNewItem,
+  changeItemStatus,
+  deleteItem,
+  editItem,
+  clearAllItems,
+  changeItemsOrder,
+} = itemsSlice.actions;
 export const itemsReducer = itemsSlice.reducer;
 export const getItemsSelector = (state: RootState) => state.items;

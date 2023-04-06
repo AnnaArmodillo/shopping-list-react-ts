@@ -45,61 +45,63 @@ export const ListItem: FC<Item> = ({ id, active, title, cost }) => {
     setNewCost(event.target.innerText);
   }
   return (
-    <div className={classNames(styles.item, !active ? styles.itemDone : '')}>
-      <div className={styles.infoWrapper}>
-        <div
-          onInput={getNewTitleHandler}
-          suppressContentEditableWarning
-          contentEditable={isContentEditable}
-          className={!active ? styles.itemInfoDone : ''}
-        >
-          {title}
-        </div>
-        <div className={styles.costWrapper}>
+    <>
+      <div className={classNames(styles.item, !active ? styles.itemDone : '')}>
+        <div className={styles.infoWrapper}>
           <div
-            onInput={getNewCostHandler}
+            onInput={getNewTitleHandler}
             suppressContentEditableWarning
             contentEditable={isContentEditable}
             className={!active ? styles.itemInfoDone : ''}
           >
-            {cost}
+            {title}
           </div>
-          <div>руб.</div>
+          <div className={styles.costWrapper}>
+            <div
+              onInput={getNewCostHandler}
+              suppressContentEditableWarning
+              contentEditable={isContentEditable}
+              className={!active ? styles.itemInfoDone : ''}
+            >
+              {cost}
+            </div>
+            <div>руб.</div>
+          </div>
         </div>
-      </div>
-      <div className={styles.buttonsWrapper}>
-        <button type="button" className={styles.buttonDelete} onClick={openModalHandler}>
-          Удалить
-        </button>
-        <button
-          type="button"
-          className={classNames(
-            { [styles.buttonMarkAsBought]: active },
-            { [styles.buttonMarkAsActive]: !active },
+        <div className={styles.buttonsWrapper}>
+          <button type="button" className={styles.buttonDelete} onClick={openModalHandler}>
+            Удалить
+          </button>
+          <button
+            type="button"
+            className={classNames(
+              { [styles.buttonMarkAsBought]: active },
+              { [styles.buttonMarkAsActive]: !active },
+            )}
+            onClick={changeStatusHandler}
+          >
+            {active ? 'Пометить как купленное' : 'Вернуть'}
+          </button>
+          {isContentEditable ? (
+            <button
+              type="button"
+              className={styles.buttonSave}
+              title="сохранить изменения"
+              onClick={saveHandler}
+            >
+              <i className="fa-solid fa-floppy-disk" />
+            </button>
+          ) : (
+            <button
+              type="button"
+              className={styles.buttonEdit}
+              title="редактировать"
+              onClick={() => setIsContentEditable(true)}
+            >
+              <i className="fa-solid fa-pen" />
+            </button>
           )}
-          onClick={changeStatusHandler}
-        >
-          {active ? 'Пометить как купленное' : 'Вернуть'}
-        </button>
-        {isContentEditable ? (
-          <button
-            type="button"
-            className={styles.buttonSave}
-            title="сохранить изменения"
-            onClick={saveHandler}
-          >
-            <i className="fa-solid fa-floppy-disk" />
-          </button>
-        ) : (
-          <button
-            type="button"
-            className={styles.buttonEdit}
-            title="редактировать"
-            onClick={() => setIsContentEditable(true)}
-          >
-            <i className="fa-solid fa-pen" />
-          </button>
-        )}
+        </div>
       </div>
       <Modal isModalOpen={isModalOpen} closeModalHandler={closeModalHandler}>
         <div className={styles.modalQuestion}>Точно удалить &quot;{title}&quot; из списка?</div>
@@ -122,6 +124,6 @@ export const ListItem: FC<Item> = ({ id, active, title, cost }) => {
           </button>
         </div>
       </Modal>
-    </div>
+    </>
   );
 };
