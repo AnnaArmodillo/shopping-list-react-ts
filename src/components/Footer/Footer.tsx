@@ -1,11 +1,12 @@
 import { Modal } from 'components/Modal/Modal';
 import { FC, useCallback, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { clearAllItems } from 'redux/slices/itemsSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { clearAllItems, getItemsSelector } from 'redux/slices/itemsSlice';
 import { ListInfo } from 'components/ListInfo/ListInfo';
 import styles from './footer.module.scss';
 
 export const Footer: FC = () => {
+  const items = useSelector(getItemsSelector);
   const dispatch = useDispatch();
   const [isModalClearOpen, setIsModalClearOpen] = useState(false);
   const closeModalClearHandler = useCallback(() => {
@@ -20,9 +21,11 @@ export const Footer: FC = () => {
   }
   return (
     <>
-      <button type="button" className={styles.buttonClear} onClick={openModalClearHandler}>
-        Очистить весь список
-      </button>
+      {items.length ? (
+        <button type="button" className={styles.buttonClear} onClick={openModalClearHandler}>
+          Очистить весь список
+        </button>
+      ) : null}
       <ListInfo />
       <Modal isModalOpen={isModalClearOpen} closeModalHandler={closeModalClearHandler}>
         <div className={styles.modalQuestion}>Точно очистить весь список?</div>

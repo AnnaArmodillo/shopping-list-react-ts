@@ -12,6 +12,9 @@ export const List: FC = () => {
   useEffect(() => {
     dispatch(changeItemsOrder(listItems));
   }, [listItems]);
+  if (!items.length) {
+    return <div>Список пуст</div>;
+  }
   return (
     <Reorder.Group axis="y" values={items} onReorder={setListItems} className={styles.list}>
       <AnimatePresence>
