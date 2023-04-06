@@ -15,4 +15,3 @@ export const getInitState = (): InitialReduxState => {
 };
 
 export const initState = getInitState();
-console.log(initState);
