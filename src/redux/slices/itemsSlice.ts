@@ -9,7 +9,7 @@ const itemsSlice = createSlice({
   reducers: {
     addNewItem: {
       reducer(state, action: PayloadAction<Item>) {
-        state.push(action.payload);
+        state.unshift(action.payload);
       },
       prepare(title: string, cost: string) {
         return {
