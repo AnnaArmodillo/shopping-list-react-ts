@@ -1,8 +1,8 @@
-// import { ListInfo } from 'components/ListInfo/ListInfo';
 import { Modal } from 'components/Modal/Modal';
 import { FC, useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { clearAllItems } from 'redux/slices/itemsSlice';
+import { ListInfo } from 'components/ListInfo/ListInfo';
 import styles from './footer.module.scss';
 
 export const Footer: FC = () => {
@@ -23,6 +23,7 @@ export const Footer: FC = () => {
       <button type="button" className={styles.buttonClear} onClick={openModalClearHandler}>
         Очистить весь список
       </button>
+      <ListInfo />
       <Modal isModalOpen={isModalClearOpen} closeModalHandler={closeModalClearHandler}>
         <div className={styles.modalQuestion}>Точно очистить весь список?</div>
         <div className={styles.buttonsModalWrapper}>
