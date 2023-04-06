@@ -40,9 +40,15 @@ export const ListItem: FC<Item> = ({ id, active, title, cost }) => {
   function getNewTitleHandler(event: React.ChangeEvent<HTMLInputElement>) {
     setNewTitle(event.target.innerText);
   }
-
   function getNewCostHandler(event: React.ChangeEvent<HTMLInputElement>) {
     setNewCost(event.target.innerText);
+  }
+  function cancelChangeHandler() {
+    const costId = `#cost${id}`;
+    const titleId = `#title${id}`;
+    document.querySelector(`${costId}`)!.closest('div')!.innerText = cost;
+    document.querySelector(`${titleId}`)!.closest('div')!.innerText = title;
+    setIsContentEditable(false);
   }
   return (
     <>
@@ -50,6 +56,7 @@ export const ListItem: FC<Item> = ({ id, active, title, cost }) => {
         <div className={styles.infoWrapper}>
           <div
             onInput={getNewTitleHandler}
+            id={`title${id}`}
             suppressContentEditableWarning
             contentEditable={isContentEditable}
             className={!active ? styles.itemInfoDone : ''}
@@ -59,6 +66,7 @@ export const ListItem: FC<Item> = ({ id, active, title, cost }) => {
           <div className={styles.costWrapper}>
             <div
               onInput={getNewCostHandler}
+              id={`cost${id}`}
               suppressContentEditableWarning
               contentEditable={isContentEditable}
               className={!active ? styles.itemInfoDone : ''}
@@ -83,14 +91,24 @@ export const ListItem: FC<Item> = ({ id, active, title, cost }) => {
             {active ? 'Пометить как купленное' : 'Вернуть'}
           </button>
           {isContentEditable ? (
-            <button
-              type="button"
-              className={styles.buttonSave}
-              title="сохранить изменения"
-              onClick={saveHandler}
-            >
-              <i className="fa-solid fa-floppy-disk" />
-            </button>
+            <>
+              <button
+                type="button"
+                className={styles.buttonSave}
+                title="сохранить изменения"
+                onClick={saveHandler}
+              >
+                <i className="fa-solid fa-floppy-disk" />
+              </button>
+              <button
+                type="button"
+                className={styles.buttonRestore}
+                title="отменить изменения"
+                onClick={cancelChangeHandler}
+              >
+                <i className="fa-solid fa-arrow-rotate-left" />
+              </button>
+            </>
           ) : (
             <button
               type="button"
