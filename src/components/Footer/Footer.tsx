@@ -1,5 +1,5 @@
-import { Modal } from 'components/Modal/Modal';
-import { FC, useCallback, useState } from 'react';
+import { ModalMemo as Modal } from 'components/Modal/Modal';
+import { FC, useCallback, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearAllItems, getItemsSelector } from 'redux/slices/itemsSlice';
 import { ListInfo } from 'components/ListInfo/ListInfo';
@@ -19,15 +19,9 @@ export const Footer: FC = () => {
     dispatch(clearAllItems());
     closeModalClearHandler();
   }
-  return (
-    <>
-      {items.length ? (
-        <button type="button" className={styles.buttonClear} onClick={openModalClearHandler}>
-          Очистить весь список
-        </button>
-      ) : null}
-      <ListInfo />
-      <Modal isModalOpen={isModalClearOpen} closeModalHandler={closeModalClearHandler}>
+  const childrenClear = useMemo(
+    () => (
+      <>
         <div className={styles.modalQuestion}>Точно очистить весь список?</div>
         <div className={styles.buttonsModalWrapper}>
           <button onClick={closeModalClearHandler} className={styles.buttonCancel} type="button">
@@ -37,6 +31,20 @@ export const Footer: FC = () => {
             Очистить
           </button>
         </div>
+      </>
+    ),
+    [],
+  );
+  return (
+    <>
+      {items.length ? (
+        <button type="button" className={styles.buttonClear} onClick={openModalClearHandler}>
+          Очистить весь список
+        </button>
+      ) : null}
+      <ListInfo />
+      <Modal isModalOpen={isModalClearOpen} closeModalHandler={closeModalClearHandler}>
+        {childrenClear}
       </Modal>
     </>
   );

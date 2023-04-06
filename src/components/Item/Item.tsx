@@ -1,12 +1,12 @@
 import { Item } from 'models/itemTypes';
-import { FC, useCallback, useState } from 'react';
+import { FC, memo, useCallback, useMemo, useState } from 'react';
 import classNames from 'classnames';
-import { Modal } from 'components/Modal/Modal';
+import { ModalMemo as Modal } from 'components/Modal/Modal';
 import { useDispatch } from 'react-redux';
 import { changeItemStatus, deleteItem, editItem } from 'redux/slices/itemsSlice';
 import styles from './item.module.scss';
 
-export const ListItem: FC<Item> = ({ id, active, title, cost }) => {
+const ListItem: FC<Item> = ({ id, active, title, cost }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalErrorOpen, setIsModalErrorOpen] = useState(false);
   const [isContentEditable, setIsContentEditable] = useState(false);
@@ -25,10 +25,10 @@ export const ListItem: FC<Item> = ({ id, active, title, cost }) => {
   function changeStatusHandler() {
     dispatch(changeItemStatus(id));
   }
-  function deleteHandler() {
+  const deleteHandler = useCallback(() => {
     dispatch(deleteItem(id));
     closeModalHandler();
-  }
+  }, [closeModalHandler, deleteItem, dispatch]);
   function saveHandler() {
     if (newTitle.length >= 2 && newTitle.length <= 20 && +newCost > 0) {
       dispatch(editItem({ id, title: newTitle, cost: newCost }));
@@ -50,6 +50,37 @@ export const ListItem: FC<Item> = ({ id, active, title, cost }) => {
     document.querySelector(`${titleId}`)!.closest('div')!.innerText = title;
     setIsContentEditable(false);
   }
+  const childrenDelete = useMemo(
+    () => (
+      <>
+        <div className={styles.modalQuestion}>Точно удалить &quot;{title}&quot; из списка?</div>
+        <div className={styles.buttonsModalWrapper}>
+          <button onClick={closeModalHandler} className={styles.buttonCancel} type="button">
+            Отмена
+          </button>
+          <button onClick={deleteHandler} className={styles.buttonSubmit} type="button">
+            Удалить
+          </button>
+        </div>
+      </>
+    ),
+    [],
+  );
+  const childrenEdit = useMemo(
+    () => (
+      <>
+        <div className={styles.modalQuestion}>
+          Наименование должно содержать от 2 до 20 символов, и цена должна быть положительным числом
+        </div>
+        <div className={styles.buttonsModalWrapper}>
+          <button onClick={closeModalErrorHandler} className={styles.buttonCancel} type="button">
+            Понятно
+          </button>
+        </div>
+      </>
+    ),
+    [],
+  );
   return (
     <>
       <div className={classNames(styles.item, !active ? styles.itemDone : '')}>
@@ -122,26 +153,13 @@ export const ListItem: FC<Item> = ({ id, active, title, cost }) => {
         </div>
       </div>
       <Modal isModalOpen={isModalOpen} closeModalHandler={closeModalHandler}>
-        <div className={styles.modalQuestion}>Точно удалить &quot;{title}&quot; из списка?</div>
-        <div className={styles.buttonsModalWrapper}>
-          <button onClick={closeModalHandler} className={styles.buttonCancel} type="button">
-            Отмена
-          </button>
-          <button onClick={deleteHandler} className={styles.buttonSubmit} type="button">
-            Удалить
-          </button>
-        </div>
+        {childrenDelete}
       </Modal>
       <Modal isModalOpen={isModalErrorOpen} closeModalHandler={closeModalErrorHandler}>
-        <div className={styles.modalQuestion}>
-          Наименование должно содержать от 2 до 20 символов, и цена должна быть положительным числом
-        </div>
-        <div className={styles.buttonsModalWrapper}>
-          <button onClick={closeModalErrorHandler} className={styles.buttonCancel} type="button">
-            Понятно
-          </button>
-        </div>
+        {childrenEdit}
       </Modal>
     </>
   );
 };
+
+export const ListItemMemo = memo(ListItem);

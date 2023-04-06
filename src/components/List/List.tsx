@@ -1,4 +1,4 @@
-import { ListItem } from 'components/Item/Item';
+import { ListItemMemo as ListItem } from 'components/Item/Item';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeItemsOrder, getItemsSelector } from 'redux/slices/itemsSlice';
 import { FC, useEffect, useState } from 'react';

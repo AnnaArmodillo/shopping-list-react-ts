@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { FC, memo, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import styles from './modal.module.scss';
 
@@ -36,13 +36,12 @@ interface ModalProps extends ModalInnerProps {
   isModalOpen: boolean;
 }
 
-export const Modal: FC<ModalProps> = ({ children, isModalOpen, closeModalHandler }) => {
+const Modal: FC<ModalProps> = ({ children, isModalOpen, closeModalHandler }) => {
   function closeModalByClickWrapper(event: React.MouseEvent): void {
     if (event.target === event.currentTarget) {
       closeModalHandler();
     }
   }
-
   if (!isModalOpen) return null;
   return createPortal(
     <div
@@ -56,3 +55,5 @@ export const Modal: FC<ModalProps> = ({ children, isModalOpen, closeModalHandler
     document.getElementById('modal')!,
   );
 };
+
+export const ModalMemo = memo(Modal);
