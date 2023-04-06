@@ -7,5 +7,5 @@ import stylelint from 'vite-plugin-stylelint';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), eslint(), stylelint(), tsconfigPaths()],
-  base: '/vite-deploy-demo/',
+  base: '/shopping-list-react-ts/',
 });
