@@ -45,11 +45,16 @@
 
 .modalQuestion {
     margin-top: 40px;
+
+    @media (max-width: 720px) {
+        margin-top: 20px;
+      }
 }
 
 .buttonsModalWrapper {
     display: flex;
-    justify-content: space-evenly;
-    margin: 20px;
+    justify-content: space-between;
+    margin: 20px auto;
+    width: 100%;
 }
 
